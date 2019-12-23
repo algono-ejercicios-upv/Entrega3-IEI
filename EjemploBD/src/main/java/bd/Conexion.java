@@ -18,7 +18,7 @@ private static Connection conexion = null;
 		    }
 		try {
 			// nombre de la base de datos Entrega2
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/Clientes",
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/entrega3procesos",
 				        "root",
 				        "root"); // password root, root en el laboratorio.
 			} catch (SQLException e) {
