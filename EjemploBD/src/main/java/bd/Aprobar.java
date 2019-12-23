@@ -8,6 +8,7 @@ public class Aprobar implements TaskListener {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	

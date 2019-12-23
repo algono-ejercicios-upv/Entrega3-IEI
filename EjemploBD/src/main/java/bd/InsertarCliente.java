@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 
 public class InsertarCliente implements TaskListener {
 	
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 
