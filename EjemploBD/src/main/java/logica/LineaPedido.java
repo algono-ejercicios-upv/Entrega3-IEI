@@ -5,13 +5,13 @@ import java.util.List;
 
 public class LineaPedido {
 	private int cantidad, codigoArticulo;
-	private List<Articulo> articulos;
-	
-	public LineaPedido(int cantidad, int codigoArticulo) {
+	private Pedido pedido;
+	public LineaPedido(int cantidad, int codigoArticulo, Pedido pedido) {
 		super();
 
 		this.cantidad = cantidad;
 		this.codigoArticulo = codigoArticulo;
+		this.pedido = pedido;
 	}
 	
 	public int getCantidad() {
@@ -29,4 +29,9 @@ public class LineaPedido {
 	public void setCodigoArticulo(int codigoArticulo) {
 		this.codigoArticulo = codigoArticulo;
 	}
+	
+	public Pedido getPedido() {
+		return this.pedido;
+	}
+	
 }

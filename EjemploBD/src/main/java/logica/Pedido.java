@@ -1,13 +1,18 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pedido {
 	private java.util.Date fechaPedido;
 	private int idCliente;
+	private List<LineaPedido> lineasPedido;
 
 	public Pedido(java.util.Date fechaPedido, int idCliente) {
 		super();
 		this.fechaPedido = fechaPedido;
 		this.idCliente = idCliente;
+		lineasPedido = new ArrayList<LineaPedido>();
 	}
 
 	public java.util.Date getFechaPedido() {
