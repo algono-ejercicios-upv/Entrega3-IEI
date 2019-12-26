@@ -11,8 +11,6 @@ import javax.mail.internet.MimeMessage;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 
-import principal.BuscarAltaCliente;
-
 public class EnviarCorreo implements TaskListener {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
@@ -21,6 +19,8 @@ public class EnviarCorreo implements TaskListener {
 		from = "jsanchez20042003@yahoo.es", // Cuenta de yahoo desde donde se envian los emails 
 		pass = "xshdyftnakceflxh", // Clave de la aplicación
 		host = "smtp.mail.yahoo.com";
+	
+	private String email, asunto, cuerpo;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
@@ -36,15 +36,15 @@ public class EnviarCorreo implements TaskListener {
 	}
 	
 	protected final String getEmail(DelegateTask delegateTask) {
-		return BuscarAltaCliente.getVariable(delegateTask, "IDEmail");
+		return email;
 	}
 	
 	protected final String getAsunto(DelegateTask delegateTask) {
-		return BuscarAltaCliente.getVariable(delegateTask, "IDAsunto");
+		return asunto;
 	}
 	
 	protected final String getCuerpo(DelegateTask delegateTask) {
-		return BuscarAltaCliente.getVariable(delegateTask, "IDCuerpo");
+		return cuerpo;
 	}
 	
 	protected final void sendMessage(String destinatario, String asunto, String cuerpo, Properties props) {
