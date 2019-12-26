@@ -1,9 +1,13 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements Serializable {
+	
+	private static final long serialVersionUID = 69420L;
+	
 	private java.util.Date fechaPedido;
 	private int idCliente;
 	private List<LineaPedido> lineasPedido;
