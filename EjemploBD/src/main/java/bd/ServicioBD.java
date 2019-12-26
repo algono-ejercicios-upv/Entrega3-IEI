@@ -6,34 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Consumer;
+import java.util.function.Function;
+
 import org.camunda.bpm.engine.delegate.DelegateTask;
 
-public abstract class ServicioBD {
-	public boolean buscar(int id) {
-		boolean encontrado = false;
-
-		Connection conn = Conexion.abrirConexion();
-		if (conn != null) {
-			String SQL = getSelectQuery();
-			try {
-				PreparedStatement statement = conn.prepareStatement(SQL);
-				statement.setInt(1, id);
-				ResultSet result = statement.executeQuery();
-				if (result.next())
-					encontrado = true;
-				else
-					encontrado = false;
-				Conexion.cerrarConexion();
-				return (encontrado);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
-		Conexion.cerrarConexion();
-		return false;
-	}
-
+public abstract class ServicioBD<T> {
 	public final String getSelectQuery() {
 		String primaryKeyName = getPrimaryKeyName();
 		String tableName = getTableName();
@@ -77,6 +54,45 @@ public abstract class ServicioBD {
 	public abstract String getTableName();
 
 	public abstract String getPrimaryKeyName();
+	
+	
+	public boolean buscar(int id) {
+		boolean encontrado = false;
+
+		ResultSet result = obtenerSet(id);
+		try {
+			encontrado = result.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return encontrado;
+	}
+	
+	public abstract T obtener(int id);
+	
+	protected final T obtener(int id, ObtenerFunction obtenerCampos) {
+		obtenerCampos.setId(id);
+		return obtenerCampos.apply(obtenerSet(id));
+	}
+	
+	protected final ResultSet obtenerSet(int id) {
+		ResultSet resultado = null;
+		Connection conn = Conexion.abrirConexion();
+		if (conn != null) {
+			try {
+				String SQL = getSelectQuery();
+				PreparedStatement statement = conn.prepareStatement(SQL);
+				statement.setInt(1, id);
+			    resultado = statement.executeQuery();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				Conexion.cerrarConexion();
+			}
+		}
+		
+		return resultado;
+	}
 
 	protected final int insertar(InsertarConsumer insertarCampos) {
 		int clave = 0;
@@ -88,10 +104,7 @@ public abstract class ServicioBD {
 				insertarCampos.accept(statement);
 
 				statement.executeUpdate();
-				ResultSet claves = statement.getGeneratedKeys();
-				claves.next();
-				clave = claves.getInt(1);
-				return clave;
+				clave = obtenerClave(statement);			
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -100,6 +113,39 @@ public abstract class ServicioBD {
 		}
 
 		return clave;
+	}
+	
+	protected static final int obtenerClave(PreparedStatement statement) throws SQLException {
+		ResultSet claves = statement.getGeneratedKeys();
+		claves.next();
+		int clave = claves.getInt(1);
+		return clave;
+	}
+	
+	protected abstract class ObtenerFunction implements Function<ResultSet, T> {
+		private int id;
+		
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+		
+		@Override
+		public final T apply(ResultSet result) {
+			try {
+				return obtener(id, result);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				Conexion.cerrarConexion();
+			}
+			return null;
+		}
+
+		public abstract T obtener(int id, ResultSet result) throws SQLException;
 	}
 
 	protected abstract class InsertarConsumer implements Consumer<PreparedStatement> {

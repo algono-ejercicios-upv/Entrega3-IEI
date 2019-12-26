@@ -2,11 +2,11 @@ package logica;
 
 public class Articulo {
 	private int idArticulo, stock, reservado;
-	private int codigoArticulo;
+	private String codigoArticulo;
 	private String descripcion;
 	private double precioUnitario;
 	
-	public Articulo(int idArticulo, int codigoArticulo, String descripcion, int stock, int reservado, double precioUnitario) {
+	public Articulo(int idArticulo, String codigoArticulo, String descripcion, int stock, int reservado, double precioUnitario) {
 		this.idArticulo = idArticulo;
 		this.codigoArticulo = codigoArticulo;
 		this.descripcion = descripcion;
@@ -23,11 +23,11 @@ public class Articulo {
 		this.idArticulo = idArticulo;
 	}
 	
-	public int getCodigoArticulo() {
+	public String getCodigoArticulo() {
 		return this.codigoArticulo;
 	}
 	
-	public void setCodigoArticulo(int codigoArticulo) {
+	public void setCodigoArticulo(String codigoArticulo) {
 		this.codigoArticulo = codigoArticulo;
 	}
 	
