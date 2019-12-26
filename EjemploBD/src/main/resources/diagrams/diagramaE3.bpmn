@@ -40,7 +40,7 @@
       <bpmn:incoming>SequenceFlow_07vcc6f</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0lhbnrj</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_0848mh6">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0848mh6" name="Cliente nuevo?">
       <bpmn:incoming>SequenceFlow_0lhbnrj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0fedl01</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0rbhyhj</bpmn:outgoing>
@@ -64,7 +64,7 @@
       <bpmn:incoming>SequenceFlow_0rbhyhj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1po68x2</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1nep620">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1nep620" name="Encontrado?">
       <bpmn:incoming>SequenceFlow_1po68x2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1i1cieu</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_037z0w6</bpmn:outgoing>
@@ -107,7 +107,7 @@
       <bpmn:outgoing>SequenceFlow_0xl6n1w</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_15ee0b0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="UserTask_0qmehv0" name="Introducir código artículo y cantidad" camunda:assignee="demo">
+    <bpmn:userTask id="UserTask_0qmehv0" name="Informar rechazo a cliente" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0xl6n1w</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vc3qa8</bpmn:outgoing>
     </bpmn:userTask>
@@ -118,7 +118,7 @@
       <bpmn:incoming>SequenceFlow_15ee0b0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rnt0ej</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="UserTask_1pvozvf" name="Informa a cliente fecha de&#10;estimada de&#10;entrega" camunda:assignee="demo">
+    <bpmn:userTask id="UserTask_1pvozvf" name="Informa a cliente fecha&#10;estimada de&#10;entrega" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1rnt0ej</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0d621k3</bpmn:outgoing>
     </bpmn:userTask>
@@ -131,7 +131,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IDCliente==0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0rbhyhj" name="No" sourceRef="ExclusiveGateway_0848mh6" targetRef="UserTask_0nw34eu">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IDCliente!=0}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IDCliente&gt;0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1po68x2" sourceRef="UserTask_0nw34eu" targetRef="ExclusiveGateway_1nep620" />
     <bpmn:sequenceFlow id="SequenceFlow_1i1cieu" name="Sí" sourceRef="ExclusiveGateway_1nep620" targetRef="ExclusiveGateway_0okl6gf">
@@ -176,6 +176,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0848mh6_di" bpmnElement="ExclusiveGateway_0848mh6" isMarkerVisible="true">
         <dc:Bounds x="445" y="225" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="433" y="195" width="74" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0lhbnrj_di" bpmnElement="SequenceFlow_0lhbnrj">
         <di:waypoint x="400" y="250" />
@@ -211,6 +214,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1nep620_di" bpmnElement="ExclusiveGateway_1nep620" isMarkerVisible="true">
         <dc:Bounds x="665" y="225" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="659" y="282" width="63" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1po68x2_di" bpmnElement="SequenceFlow_1po68x2">
         <di:waypoint x="630" y="250" />
