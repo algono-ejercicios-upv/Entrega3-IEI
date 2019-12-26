@@ -13,7 +13,6 @@ private static Connection conexion = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		    } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    }
 		try {
@@ -22,7 +21,6 @@ private static Connection conexion = null;
 				        "root",
 				        "root"); // password root, root en el laboratorio.
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
