@@ -19,40 +19,26 @@ public class EnviarCorreo implements TaskListener {
 	private static final String from = "camundasolutions@yahoo.com", // Cuenta de yahoo desde donde se envian los emails
 			pass = "uinxhxlahdsdcdgz", // Clave de la aplicaci�n
 			host = "smtp.mail.yahoo.com";
-	
-	private String email, asunto, cuerpo;
 
-	public String getEmail() {
-		return email;
+	public String getEmail(DelegateTask delegateTask) {
+		return ServicioBD.getVariable(delegateTask, "IDEmail");
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public String getAsunto(DelegateTask delegateTask) {
+		return ServicioBD.getVariable(delegateTask, "IDAsunto");
 	}
 
-	public String getAsunto() {
-		return asunto;
-	}
-
-	public void setAsunto(String asunto) {
-		this.asunto = asunto;
-	}
-
-	public String getCuerpo() {
-		return cuerpo;
-	}
-
-	public void setCuerpo(String cuerpo) {
-		this.cuerpo = cuerpo;
+	public String getCuerpo(DelegateTask delegateTask) {
+		return ServicioBD.getVariable(delegateTask, "IDCuerpo");
 	}
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
 		System.out.println("Inicio de envio de correo");
 		
-		String destinatario = getEmail();
-		String asunto = getAsunto();
-		String cuerpo = getCuerpo();
+		String destinatario = getEmail(delegateTask);
+		String asunto = getAsunto(delegateTask);
+		String cuerpo = getCuerpo(delegateTask);
 		
 		Properties props = initProperties();
 

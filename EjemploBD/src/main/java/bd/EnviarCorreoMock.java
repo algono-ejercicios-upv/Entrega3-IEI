@@ -14,9 +14,9 @@ public class EnviarCorreoMock extends EnviarCorreo implements TaskListener {
 	public void notify(DelegateTask delegateTask) {
 		System.out.println("Inicio Mock envio de correo");
 		
-		String destinatario = getEmail();
-		String asunto = getAsunto();
-		String cuerpo = getCuerpo();
+		String destinatario = getEmail(delegateTask);
+		String asunto = getAsunto(delegateTask);
+		String cuerpo = getCuerpo(delegateTask);
 		
 		Properties props = initProperties();
 
