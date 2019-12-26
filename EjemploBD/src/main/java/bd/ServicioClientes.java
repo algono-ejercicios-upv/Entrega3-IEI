@@ -5,9 +5,10 @@ import java.sql.SQLException;
 import java.util.Date;
 
 public class ServicioClientes extends ServicioBD {
-	
+
 	private static final String tableName = "Cliente", primaryKeyName = "idCliente";
-	private static final String[] fields = new String[] {"Nombre", "Direccion", "FechaAlta", "NumTarjeta", "Emisor", "Correoelectronico"};
+	private static final String[] fields = new String[] { "Nombre", "Direccion", "FechaAlta", "NumTarjeta", "Emisor",
+			"Correoelectronico" };
 
 	@Override
 	public String[] getFields() {
@@ -23,7 +24,7 @@ public class ServicioClientes extends ServicioBD {
 	public String getPrimaryKeyName() {
 		return primaryKeyName;
 	}
-	
+
 	/**
 	 * Inserta un cliente en la base de datos
 	 * 

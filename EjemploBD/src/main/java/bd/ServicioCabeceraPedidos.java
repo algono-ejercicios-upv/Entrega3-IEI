@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ServicioCabeceraPedidos extends ServicioBD {
-	
+
 	private static final String tableName = "cabecerapedidos", primaryKeyName = "idCabeceraPedidos";
-	private static final String[] fields = new String[] {"FechaPedido", "Clientes_idClientes"};
+	private static final String[] fields = new String[] { "FechaPedido", "Clientes_idClientes" };
 
 	@Override
 	public String[] getFields() {
@@ -22,10 +22,9 @@ public class ServicioCabeceraPedidos extends ServicioBD {
 	public String getPrimaryKeyName() {
 		return primaryKeyName;
 	}
-	
+
 	public int insertar(java.util.Date fechaPedido, int idCliente) {
-		return insertar(
-				new InsertarCabeceraPedidoConsumer(fechaPedido, idCliente));
+		return insertar(new InsertarCabeceraPedidoConsumer(fechaPedido, idCliente));
 	}
 
 	protected class InsertarCabeceraPedidoConsumer extends InsertarConsumer {

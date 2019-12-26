@@ -8,7 +8,6 @@ public class Aprobar implements TaskListener {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
 	public void notify(DelegateTask tareaDelegada) {
 		boolean aprobado = (boolean) tareaDelegada.getExecution().getVariable("IDAprobado");
