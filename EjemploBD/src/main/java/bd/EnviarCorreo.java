@@ -18,6 +18,8 @@ public class EnviarCorreo implements TaskListener {
 	private static final String from = "jsanchez20042003@yahoo.es", // Cuenta de yahoo desde donde se envian los emails
 			pass = "xshdyftnakceflxh", // Clave de la aplicaci�n
 			host = "smtp.mail.yahoo.com";
+	
+	private String email, asunto, cuerpo;
 
 	public String getEmail() {
 		return email;
