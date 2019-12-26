@@ -14,9 +14,9 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 public class EnviarCorreo implements TaskListener {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
-    
-	private static final String from = "jsanchez20042003@yahoo.es", // Cuenta de yahoo desde donde se envian los emails
-			pass = "xshdyftnakceflxh", // Clave de la aplicaci�n
+
+	private static final String from = "camundasolutions@yahoo.com", // Cuenta de yahoo desde donde se envian los emails
+			pass = "uinxhxlahdsdcdgz", // Clave de la aplicaci�n
 			host = "smtp.mail.yahoo.com";
 	
 	private String email, asunto, cuerpo;
