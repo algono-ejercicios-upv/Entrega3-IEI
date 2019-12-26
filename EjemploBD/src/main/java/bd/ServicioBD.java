@@ -80,12 +80,15 @@ public abstract class ServicioBD<T> {
 	public boolean buscar(int id) {
 		boolean encontrado = false;
 
-		ResultSet result = obtenerSet(id);
 		try {
-			encontrado = result.next();
+			ResultSet result = obtenerSet(id);
+			if (result != null) {
+				encontrado = result.next();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return encontrado;
 	}
 	
@@ -93,10 +96,17 @@ public abstract class ServicioBD<T> {
 	
 	protected final T obtener(int id, ObtenerFunction obtenerCampos) {
 		obtenerCampos.setId(id);
-		return obtenerCampos.apply(obtenerSet(id));
+		try {
+			return obtenerCampos.apply(obtenerSet(id));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cerrarConexion();
+		}
+		return null;		
 	}
 	
-	protected final ResultSet obtenerSet(int id) {
+	protected final ResultSet obtenerSet(int id) throws SQLException {
 		ResultSet resultado = null;
 		Connection conn = Conexion.abrirConexion();
 		if (conn != null) {
@@ -105,8 +115,6 @@ public abstract class ServicioBD<T> {
 				PreparedStatement statement = conn.prepareStatement(SQL);
 				statement.setInt(1, id);
 			    resultado = statement.executeQuery();
-			} catch (SQLException e) {
-				e.printStackTrace();
 			} finally {
 				Conexion.cerrarConexion();
 			}
