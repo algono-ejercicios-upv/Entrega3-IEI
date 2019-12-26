@@ -4,6 +4,8 @@ import java.util.Date;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 
+import logica.Cliente;
+
 public class InsertarCliente implements TaskListener {
 
 	@SuppressWarnings("unused")
@@ -22,7 +24,7 @@ public class InsertarCliente implements TaskListener {
 		String direccion = (String) tareaDelegada.getExecution().getVariable("IDDireccion");
 
 		ServicioClientes servicioClientes = new ServicioClientes();
-		int idcliente = servicioClientes.insertar(nombre, direccion, fechaAlta, numTarjeta, emisor, email);
+		int idcliente = servicioClientes.insertar(new Cliente(nombre, direccion, fechaAlta, numTarjeta, emisor, email));
 
 		tareaDelegada.getExecution().setVariable("IDCliente", idcliente);
 

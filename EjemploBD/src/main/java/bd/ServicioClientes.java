@@ -3,8 +3,6 @@ package bd;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-
 import logica.Cliente;
 
 public class ServicioClientes extends ServicioBD<Cliente> {
@@ -61,38 +59,29 @@ public class ServicioClientes extends ServicioBD<Cliente> {
 	 * @param correoElectronico
 	 * @return La clave con la que se insertó
 	 */
-	public int insertar(String nombre, String direccion, java.util.Date fechaAlta, String numTarjeta, String emisor,
-			String correoElectronico) {
+	public int insertar(Cliente cliente) {
 		return insertar(
-				new InsertarClienteConsumer(nombre, direccion, fechaAlta, numTarjeta, emisor, correoElectronico));
+				new InsertarClienteConsumer(cliente));
 	}
 
 	protected class InsertarClienteConsumer extends InsertarConsumer {
-		private String nombre, direccion;
-		private java.util.Date fechaAlta;
-		private String numTarjeta, emisor, correoElectronico;
+		private Cliente cliente;
 
-		public InsertarClienteConsumer(String nombre, String direccion, Date fechaAlta, String numTarjeta,
-				String emisor, String correoElectronico) {
+		public InsertarClienteConsumer(Cliente cliente) {
 			super();
-			this.nombre = nombre;
-			this.direccion = direccion;
-			this.fechaAlta = fechaAlta;
-			this.numTarjeta = numTarjeta;
-			this.emisor = emisor;
-			this.correoElectronico = correoElectronico;
+			this.cliente = cliente;
 		}
 
 		@Override
 		public void insertar(PreparedStatement statement) throws SQLException {
-			statement.setString(1, nombre);
-			statement.setString(2, direccion);
+			statement.setString(1, cliente.getNombre());
+			statement.setString(2, cliente.getDireccion());
 
-			statement.setDate(3, toSqlDate(fechaAlta));
+			statement.setDate(3, toSqlDate(cliente.getFechaAlta()));
 
-			statement.setString(4, numTarjeta);
-			statement.setString(5, emisor);
-			statement.setString(6, correoElectronico);
+			statement.setString(4, cliente.getNumTarjeta());
+			statement.setString(5, cliente.getEmisor());
+			statement.setString(6, cliente.getCorreoElectronico());
 		}
 	}
 }

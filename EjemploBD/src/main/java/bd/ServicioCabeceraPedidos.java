@@ -26,24 +26,22 @@ public class ServicioCabeceraPedidos extends ServicioBD<Pedido> {
 		return primaryKeyName;
 	}
 
-	public int insertar(java.util.Date fechaPedido, int idCliente) {
-		return insertar(new InsertarCabeceraPedidoConsumer(fechaPedido, idCliente));
+	public int insertar(Pedido pedido) {
+		return insertar(new InsertarCabeceraPedidoConsumer(pedido));
 	}
 
 	protected class InsertarCabeceraPedidoConsumer extends InsertarConsumer {
-		private java.util.Date fechaPedido;
-		private int idCliente;
+		private Pedido pedido;
 
-		public InsertarCabeceraPedidoConsumer(java.util.Date fechaPedido, int idCliente) {
+		public InsertarCabeceraPedidoConsumer(Pedido pedido) {
 			super();
-			this.fechaPedido = fechaPedido;
-			this.idCliente = idCliente;
+			this.pedido = pedido;
 		}
 
 		@Override
 		public void insertar(PreparedStatement statement) throws SQLException {
-			statement.setDate(1, toSqlDate(fechaPedido));
-			statement.setInt(2, idCliente);
+			statement.setDate(1, toSqlDate(pedido.getFechaPedido()));
+			statement.setInt(2, pedido.getIdCliente());
 		}
 	}
 
