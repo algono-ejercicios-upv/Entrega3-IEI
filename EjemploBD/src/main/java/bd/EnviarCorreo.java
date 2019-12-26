@@ -15,8 +15,8 @@ public class EnviarCorreo implements TaskListener {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	private static final String from = "jsanchez20042003@yahoo.es", // Cuenta de yahoo desde donde se envian los emails
-			pass = "xshdyftnakceflxh", // Clave de la aplicación
+	private static final String from = "camundasolutions@yahoo.com", // Cuenta de yahoo desde donde se envian los emails
+			pass = "uinxhxlahdsdcdgz", // Clave de la aplicación
 			host = "smtp.mail.yahoo.com";
 
 	@Override
