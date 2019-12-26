@@ -3,8 +3,13 @@ package bd;
 import java.util.Properties;
 
 import org.camunda.bpm.engine.delegate.DelegateTask;
+import org.camunda.bpm.engine.delegate.TaskListener;
 
-public class EnviarCorreoMock extends EnviarCorreo {
+public class EnviarCorreoMock extends EnviarCorreo implements TaskListener {
+	
+	@SuppressWarnings("unused")
+	private static final long serialVersionUID = 1L;
+	
 	@Override
 	public void notify(DelegateTask delegateTask) {
 		System.out.println("Inicio Mock envio de correo");
