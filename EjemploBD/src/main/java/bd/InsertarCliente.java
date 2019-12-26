@@ -24,10 +24,7 @@ public class InsertarCliente implements TaskListener {
 		String direccion = (String) tareaDelegada.getExecution().getVariable("IDDireccion");
 
 		ServicioClientes servicioClientes = new ServicioClientes();
-		int idcliente = servicioClientes.insertar(new Cliente(nombre, direccion, fechaAlta, numTarjeta, emisor, email));
-
-		tareaDelegada.getExecution().setVariable("IDCliente", idcliente);
-
+		servicioClientes.insertar(new Cliente(nombre, direccion, fechaAlta, numTarjeta, emisor, email));
 	}
 
 }
