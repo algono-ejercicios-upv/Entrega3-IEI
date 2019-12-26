@@ -49,7 +49,7 @@ public class ServicioClientes extends ServicioBD<Cliente> {
 	}
 
 	@Override
-	public int actualizar(Cliente cliente) {
+	public void actualizar(Cliente cliente) {
 		throw new UnsupportedOperationException();
 	}
 	

@@ -27,7 +27,7 @@ public class ServicioCabeceraPedidos extends ServicioBD<Pedido> {
 	}
 	
 	@Override
-	public int actualizar(Pedido pedido) {
+	public void actualizar(Pedido pedido) {
 		throw new UnsupportedOperationException();
 	}
 	

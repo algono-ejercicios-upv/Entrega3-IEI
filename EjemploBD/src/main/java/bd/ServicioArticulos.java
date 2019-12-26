@@ -28,8 +28,8 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 	}
 	
 	@Override
-	public int actualizar(Articulo articulo) {
-		return actualizar(articulo.getIdArticulo(), new InsertarArticuloConsumer(articulo));
+	public void actualizar(Articulo articulo) {
+		actualizar(articulo.getIdArticulo(), new InsertarArticuloConsumer(articulo));
 	}
 	
 	@Override

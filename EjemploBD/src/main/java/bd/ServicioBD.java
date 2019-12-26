@@ -138,10 +138,9 @@ public abstract class ServicioBD<T> {
 		return clave;
 	}
 	
-	public abstract int actualizar(T item);
+	public abstract void actualizar(T item);
 	
-	protected final int actualizar(int id, InsertarConsumer insertarCampos) {
-		int clave = 0;
+	protected final void actualizar(int id, InsertarConsumer insertarCampos) {
 		Connection conn = Conexion.abrirConexion();
 		if (conn != null) {
 			String SQL = getUpdateQuery();
@@ -151,15 +150,12 @@ public abstract class ServicioBD<T> {
 				insertarCampos.accept(statement);
 
 				statement.executeUpdate();
-				clave = obtenerClave(statement);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				Conexion.cerrarConexion();
 			}
 		}
-
-		return clave;
 	}
 	
 	protected static final int obtenerClave(PreparedStatement statement) throws SQLException {
