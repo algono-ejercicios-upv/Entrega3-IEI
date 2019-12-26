@@ -14,10 +14,8 @@ public class Aprobar implements TaskListener {
 	
 	@Override
 	public void notify(DelegateTask tareaDelegada) {
-		// TODO Auto-generated method stub
-		boolean Aprobado = (Boolean) tareaDelegada.getExecution().getVariable("IDAprobado");
-		
-		System.out.println("Terminación del proceso con resultado " + Aprobado);
+		boolean Aprobado = (boolean) tareaDelegada.getExecution().getVariable("IDAprobado");
+		System.out.println("Terminación del proceso con resultado: " + Aprobado);
 	}
 
 }
