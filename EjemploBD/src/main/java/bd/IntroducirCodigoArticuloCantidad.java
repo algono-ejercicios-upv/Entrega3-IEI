@@ -16,8 +16,8 @@ public class IntroducirCodigoArticuloCantidad implements TaskListener {
 	@Override
 	public void notify(DelegateTask tareaDelegada) {
 		// Acceso a las variables introducidas en el formulario
-		int articulo = ServicioBD.getVariable(tareaDelegada, "IDArticulo");
-		int cantidadArticulo = ServicioBD.getVariable(tareaDelegada, "IDCantidadArticulo");
+		int articulo = Integer.parseInt(ServicioBD.<String>getVariable(tareaDelegada, "IDArticulo"));
+		int cantidadArticulo = Integer.parseInt(ServicioBD.<String>getVariable(tareaDelegada, "IDCantidadArticulo"));
 
 		String pedidoActualVariableName = "IDPedidoActual";
 		Pedido pedidoActual;
