@@ -5,10 +5,9 @@ import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 
 public class InsertarCliente implements TaskListener {
-	
+
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
-
 
 	@Override
 	public void notify(DelegateTask tareaDelegada) {
@@ -17,14 +16,14 @@ public class InsertarCliente implements TaskListener {
 		String email = (String) tareaDelegada.getExecution().getVariable("IDEmail");
 		Date fechaAlta = (Date) tareaDelegada.getExecution().getVariable("IDFechaAlta");
 		String numTarjeta = (String) tareaDelegada.getExecution().getVariable("IDTarjeta");
-		
+
 		// Acceso al tipo enumerado
 		String emisor = (String) tareaDelegada.getExecution().getVariable("IDEmisor");
 		String direccion = (String) tareaDelegada.getExecution().getVariable("IDDireccion");
-		
-		ServicioClientes servicio = new ServicioClientes();
-		int idcliente = servicio.insertarCliente(nombre, direccion, fechaAlta, numTarjeta, emisor, email);
-		
+
+		ServicioClientes servicioClientes = new ServicioClientes();
+		int idcliente = servicioClientes.insertar(nombre, direccion, fechaAlta, numTarjeta, emisor, email);
+
 		tareaDelegada.getExecution().setVariable("IDCliente", idcliente);
 
 	}

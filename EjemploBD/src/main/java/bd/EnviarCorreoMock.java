@@ -14,7 +14,7 @@ public class EnviarCorreoMock extends EnviarCorreo {
 		String cuerpo = getCuerpo();
 		
 		Properties props = initProperties();
-		
+
 		System.out.println("Fin Mock envio de correo");
 		System.out.println("----------------");
 		System.out.println("Datos obtenidos:");

@@ -14,13 +14,10 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 public class EnviarCorreo implements TaskListener {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
-	
-	private static final String 
-		from = "jsanchez20042003@yahoo.es", // Cuenta de yahoo desde donde se envian los emails 
-		pass = "xshdyftnakceflxh", // Clave de la aplicación
-		host = "smtp.mail.yahoo.com";
-	
-	private String email, asunto, cuerpo;
+    
+	private static final String from = "jsanchez20042003@yahoo.es", // Cuenta de yahoo desde donde se envian los emails
+			pass = "xshdyftnakceflxh", // Clave de la aplicaciï¿½n
+			host = "smtp.mail.yahoo.com";
 
 	public String getEmail() {
 		return email;
@@ -55,20 +52,20 @@ public class EnviarCorreo implements TaskListener {
 		String cuerpo = getCuerpo();
 		
 		Properties props = initProperties();
-		
+
 		sendMessage(destinatario, asunto, cuerpo, props);
 	}
 
 	public final void sendMessage(String destinatario, String asunto, String cuerpo, Properties props) {
 		Session session = Session.getInstance(props, new MyAuthenticator());
-		
+
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
 			message.setSubject(asunto);
 			message.setText(cuerpo);
-			
+
 			Transport.send(message);
 		} catch (MessagingException e) {
 			System.out.println("Excepcion detectada: " + e);
@@ -82,9 +79,9 @@ public class EnviarCorreo implements TaskListener {
 	
 	public static final Properties initProperties(String host, String from, String pass) {
 		Properties props = System.getProperties();
-		
+
 		String trueString = new Boolean(true).toString();
-				
+
 		props.put("mail.smtp.starttls.enable", trueString);
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.user", from);
@@ -92,7 +89,7 @@ public class EnviarCorreo implements TaskListener {
 		props.put("mail.smtp.ssl.enable", trueString);
 		props.put("mail.smtp.port", "465");
 		props.put("mail.smtp.auth", trueString);
-		
+
 		return props;
 	}
 	

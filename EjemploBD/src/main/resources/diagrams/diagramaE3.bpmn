@@ -108,6 +108,19 @@
       <bpmn:outgoing>SequenceFlow_15ee0b0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="UserTask_0qmehv0" name="Informar rechazo a cliente" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="EnviarCorreoMock" event="complete">
+          <camunda:field name="asunto">
+            <camunda:string>Pedido rechazado</camunda:string>
+          </camunda:field>
+          <camunda:field name="cuerpo">
+            <camunda:string>Su pedido ha sido rechazado, disculpen las molestias.</camunda:string>
+          </camunda:field>
+          <camunda:field name="email">
+            <camunda:expression>${IDEmail}</camunda:expression>
+          </camunda:field>
+        </camunda:taskListener>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0xl6n1w</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vc3qa8</bpmn:outgoing>
     </bpmn:userTask>
@@ -119,6 +132,19 @@
       <bpmn:outgoing>SequenceFlow_1rnt0ej</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:userTask id="UserTask_1pvozvf" name="Informa a cliente fecha&#10;estimada de&#10;entrega" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="EnviarCorreoMock" event="complete">
+          <camunda:field name="asunto">
+            <camunda:string>Pedido rechazado</camunda:string>
+          </camunda:field>
+          <camunda:field name="cuerpo">
+            <camunda:string>Su pedido ha sido rechazado, disculpen las molestias.</camunda:string>
+          </camunda:field>
+          <camunda:field name="email">
+            <camunda:expression>${IDEmail}</camunda:expression>
+          </camunda:field>
+        </camunda:taskListener>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1rnt0ej</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0d621k3</bpmn:outgoing>
     </bpmn:userTask>
@@ -147,7 +173,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1nrt7qw" name="Sí" sourceRef="ExclusiveGateway_1j4rs9a" targetRef="ExclusiveGateway_0xqkn9v">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IDOtroArticulo==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1gs665a" sourceRef="ExclusiveGateway_1j4rs9a" targetRef="ServiceTask_103elp6">
+    <bpmn:sequenceFlow id="SequenceFlow_1gs665a" name="No" sourceRef="ExclusiveGateway_1j4rs9a" targetRef="ServiceTask_103elp6">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IDOtroArticulo==true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0ap4jbt" sourceRef="ServiceTask_103elp6" targetRef="ExclusiveGateway_1a99z6o" />
@@ -290,6 +316,9 @@
       <bpmndi:BPMNEdge id="SequenceFlow_1gs665a_di" bpmnElement="SequenceFlow_1gs665a">
         <di:waypoint x="1135" y="250" />
         <di:waypoint x="1180" y="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1150" y="223" width="15" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1a99z6o_di" bpmnElement="ExclusiveGateway_1a99z6o" isMarkerVisible="true">
         <dc:Bounds x="1315" y="225" width="50" height="50" />
