@@ -1,6 +1,10 @@
 package logica;
 
-public class LineaPedido {
+import java.io.Serializable;
+
+public class LineaPedido implements Serializable {
+	private static final long serialVersionUID = 42069L;
+	
 	private int codigoArticulo, cantidad;
 	private Pedido pedido;
 	public LineaPedido(int codigoArticulo, int cantidad, Pedido pedido) {

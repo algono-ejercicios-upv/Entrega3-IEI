@@ -11,8 +11,7 @@ public class Pedido implements Serializable {
 	private java.util.Date fechaPedido;
 	private int idCliente;
 	
-	// La keyword 'transient' vuelve el campo no serializable
-	private transient List<LineaPedido> lineasPedido;
+	private List<LineaPedido> lineasPedido;
 
 	public Pedido(java.util.Date fechaPedido, int idCliente) {
 		super();
