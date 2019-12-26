@@ -14,7 +14,7 @@ public class ValidarPedido implements JavaDelegate {
 		Pedido pedidoActual = (Pedido) ejecucion.getVariable("IDPedidoActual");
 		ServicioArticulos servicioArticulos = new ServicioArticulos();
 		
-		for (int i = pedidoActual.getLineasPedido().size(); i >= 0; i--) {
+		for (int i = pedidoActual.getLineasPedido().size() - 1; i >= 0; i--) {
 			LineaPedido lineaPedido = pedidoActual.getLineasPedido().get(i);
 			
 			System.out.println("Comprobando si existe el código: " + lineaPedido.getCodigoArticulo());
