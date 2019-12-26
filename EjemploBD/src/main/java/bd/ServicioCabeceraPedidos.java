@@ -25,7 +25,13 @@ public class ServicioCabeceraPedidos extends ServicioBD<Pedido> {
 	public String getPrimaryKeyName() {
 		return primaryKeyName;
 	}
-
+	
+	@Override
+	public int actualizar(Pedido pedido) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	public int insertar(Pedido pedido) {
 		return insertar(new InsertarCabeceraPedidoConsumer(pedido));
 	}

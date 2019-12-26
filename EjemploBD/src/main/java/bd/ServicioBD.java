@@ -16,6 +16,27 @@ public abstract class ServicioBD<T> {
 		String tableName = getTableName();
 		return String.format("SELECT %s FROM %s where %s =?", primaryKeyName, tableName, primaryKeyName);
 	}
+	
+	public final String getUpdateQuery() {
+		String primaryKeyName = getPrimaryKeyName();
+		String tableName = getTableName();
+		
+		String[] fields = getFields();
+		int fieldCount = fields.length;
+
+		String updateQueryValues = "";
+
+		for (int i = 0; i < fieldCount; i++) {
+			String field = fields[i];
+			updateQueryValues += field + " =?";
+
+			if (i < fieldCount - 1) {
+				updateQueryValues += ",";
+			}
+		}
+		
+		return String.format("UPDATE %s SET %s WHERE %s =?", tableName, updateQueryValues, primaryKeyName);
+	}
 
 	public final String getInsertQuery() {
 		String tableName = getTableName();
@@ -93,6 +114,8 @@ public abstract class ServicioBD<T> {
 		
 		return resultado;
 	}
+	
+	public abstract int insertar(T item);
 
 	protected final int insertar(InsertarConsumer insertarCampos) {
 		int clave = 0;
@@ -105,6 +128,30 @@ public abstract class ServicioBD<T> {
 
 				statement.executeUpdate();
 				clave = obtenerClave(statement);			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				Conexion.cerrarConexion();
+			}
+		}
+
+		return clave;
+	}
+	
+	public abstract int actualizar(T item);
+	
+	protected final int actualizar(int id, InsertarConsumer insertarCampos) {
+		int clave = 0;
+		Connection conn = Conexion.abrirConexion();
+		if (conn != null) {
+			String SQL = getUpdateQuery();
+			try {
+				PreparedStatement statement = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+				statement.setInt(getFields().length + 1, id);
+				insertarCampos.accept(statement);
+
+				statement.executeUpdate();
+				clave = obtenerClave(statement);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

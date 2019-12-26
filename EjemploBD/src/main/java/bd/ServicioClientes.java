@@ -48,17 +48,12 @@ public class ServicioClientes extends ServicioBD<Cliente> {
 		}
 	}
 
-	/**
-	 * Inserta un cliente en la base de datos
-	 * 
-	 * @param nombre
-	 * @param direccion
-	 * @param fechaAlta
-	 * @param numTarjeta
-	 * @param emisor
-	 * @param correoElectronico
-	 * @return La clave con la que se insertó
-	 */
+	@Override
+	public int actualizar(Cliente cliente) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	public int insertar(Cliente cliente) {
 		return insertar(
 				new InsertarClienteConsumer(cliente));
