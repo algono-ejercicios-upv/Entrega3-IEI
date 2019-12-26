@@ -11,8 +11,6 @@ import javax.mail.internet.MimeMessage;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 
-import principal.BuscarAltaCliente;
-
 public class EnviarCorreo implements TaskListener {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
@@ -36,15 +34,15 @@ public class EnviarCorreo implements TaskListener {
 	}
 	
 	protected final String getEmail(DelegateTask delegateTask) {
-		return BuscarAltaCliente.getVariable(delegateTask, "IDEmail");
+		return ServicioBD.getVariable(delegateTask, "IDEmail");
 	}
 	
 	protected final String getAsunto(DelegateTask delegateTask) {
-		return BuscarAltaCliente.getVariable(delegateTask, "IDAsunto");
+		return ServicioBD.getVariable(delegateTask, "IDAsunto");
 	}
 	
 	protected final String getCuerpo(DelegateTask delegateTask) {
-		return BuscarAltaCliente.getVariable(delegateTask, "IDCuerpo");
+		return ServicioBD.getVariable(delegateTask, "IDCuerpo");
 	}
 	
 	protected final void sendMessage(String destinatario, String asunto, String cuerpo, Properties props) {

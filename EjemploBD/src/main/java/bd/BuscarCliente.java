@@ -11,8 +11,8 @@ public class BuscarCliente implements JavaDelegate {
 		int codCliente = Integer.parseInt(((String) ejecucion.getVariable("IDCliente")));
 		System.out.println("Buscando cliente " + codCliente);
 		
-		ServicioClientes servicio = new ServicioClientes();
-		boolean encontrado = servicio.buscarCliente(codCliente);
+		ServicioClientes servicioClientes = new ServicioClientes();
+		boolean encontrado = servicioClientes.buscar(codCliente);
 		
 		System.out.println("Encontrado " + encontrado);
 		
