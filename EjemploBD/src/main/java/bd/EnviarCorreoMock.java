@@ -5,6 +5,12 @@ import java.util.Properties;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 
+/**
+ * Version de la clase EnviarCorreo que, en lugar de enviar un correo,
+ * escribe en consola los datos que obtiene. Usado para testing (sin tener
+ * que mandar correos constantemente)
+ *
+ */
 public class EnviarCorreoMock extends EnviarCorreo implements TaskListener {
 	
 	@SuppressWarnings("unused")
