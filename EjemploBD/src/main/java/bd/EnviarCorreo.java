@@ -17,7 +17,7 @@ public class EnviarCorreo implements TaskListener {
 	private static final long serialVersionUID = 1L;
 
 	private static final String from = "camundasolutions@yahoo.com", // Cuenta de yahoo desde donde se envian los emails
-			pass = "uinxhxlahdsdcdgz", // Clave de la aplicaci�n
+			pass = "uinxhxlahdsdcdgz", // Clave de la aplicacion
 			host = "smtp.mail.yahoo.com";
 
 	public String getEmail(DelegateTask delegateTask) {
