@@ -30,4 +30,8 @@ public class Pedido {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
+
+	public List<LineaPedido> getLineasPedido() {
+		return lineasPedido;
+	}
 }

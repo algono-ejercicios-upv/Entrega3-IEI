@@ -19,7 +19,7 @@ public class Articulo {
 		return this.idArticulo;
 	}
 	
-	public void setIdArticuloo(int idArticulo) {
+	public void setIdArticulo(int idArticulo) {
 		this.idArticulo = idArticulo;
 	}
 	

@@ -1,16 +1,13 @@
 package logica;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LineaPedido {
-	private int cantidad, codigoArticulo;
+	private int codigoArticulo, cantidad;
 	private Pedido pedido;
-	public LineaPedido(int cantidad, int codigoArticulo, Pedido pedido) {
+	public LineaPedido(int codigoArticulo, int cantidad, Pedido pedido) {
 		super();
 
-		this.cantidad = cantidad;
 		this.codigoArticulo = codigoArticulo;
+		this.cantidad = cantidad;
 		this.pedido = pedido;
 	}
 	
