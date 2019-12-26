@@ -19,7 +19,7 @@ public class ComprobarStockyReservar implements JavaDelegate {
 		
 		System.out.println("Comprobando reservas a realizar...");
 		
-		for(int i = 0; i < pedidoActual.getLineasPedido().size(); i++) {
+		for(int i = pedidoActual.getLineasPedido().size(); i >= 0; i--) {
 			Articulo articulo = servicioArticulos.obtener(i);
 			int cantidadAReservar = pedidoActual.getLineasPedido().get(i).getCantidad();
 			

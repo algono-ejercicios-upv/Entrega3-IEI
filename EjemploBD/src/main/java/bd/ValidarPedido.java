@@ -13,22 +13,20 @@ public class ValidarPedido implements JavaDelegate {
 		boolean valido;
 		Pedido pedidoActual = (Pedido) ejecucion.getVariable("IDPedidoActual");
 		ServicioArticulos servicioArticulos = new ServicioArticulos();
-		for(int i = 0; i < pedidoActual.getLineasPedido().size(); i++) {
+		
+		for (int i = pedidoActual.getLineasPedido().size(); i >= 0; i--) {
 			LineaPedido lineaPedido = pedidoActual.getLineasPedido().get(i);
 			
 			System.out.println("Comprobando si existe el código: " + lineaPedido.getCodigoArticulo());
 			boolean encontrado = servicioArticulos.buscar(lineaPedido.getCodigoArticulo());
 
-			if(!encontrado) {
-				System.out.println("Elemento " + pedidoActual.getLineasPedido().remove(i) + "no existe.");
+			if (!encontrado) {
+				LineaPedido lineaEliminada = pedidoActual.getLineasPedido().remove(i);
+				System.out.println("Elemento " + lineaEliminada + "no existe.");
 			}
 		}
 		
-		if(pedidoActual.getLineasPedido().size() > 0) {
-			valido = true;
-		} else {
-			valido = false;
-		}
+		valido = pedidoActual.getLineasPedido().size() > 0;
 		ejecucion.setVariable("IDValido", valido);
 	}
 }
