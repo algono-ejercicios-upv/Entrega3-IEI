@@ -22,32 +22,44 @@ public class EnviarCorreo implements TaskListener {
 	
 	private String email, asunto, cuerpo;
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAsunto() {
+		return asunto;
+	}
+
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+
+	public String getCuerpo() {
+		return cuerpo;
+	}
+
+	public void setCuerpo(String cuerpo) {
+		this.cuerpo = cuerpo;
+	}
+
 	@Override
 	public void notify(DelegateTask delegateTask) {
 		System.out.println("Inicio de envio de correo");
 		
-		String destinatario = getEmail(delegateTask);
-		String asunto = getAsunto(delegateTask);
-		String cuerpo = getCuerpo(delegateTask);
+		String destinatario = getEmail();
+		String asunto = getAsunto();
+		String cuerpo = getCuerpo();
 		
 		Properties props = initProperties();
 		
 		sendMessage(destinatario, asunto, cuerpo, props);
 	}
-	
-	protected final String getEmail(DelegateTask delegateTask) {
-		return email;
-	}
-	
-	protected final String getAsunto(DelegateTask delegateTask) {
-		return asunto;
-	}
-	
-	protected final String getCuerpo(DelegateTask delegateTask) {
-		return cuerpo;
-	}
-	
-	protected final void sendMessage(String destinatario, String asunto, String cuerpo, Properties props) {
+
+	public final void sendMessage(String destinatario, String asunto, String cuerpo, Properties props) {
 		Session session = Session.getInstance(props, new MyAuthenticator());
 		
 		try {
@@ -64,11 +76,11 @@ public class EnviarCorreo implements TaskListener {
 		}
 	}
 	
-	protected static final Properties initProperties() {
+	public static final Properties initProperties() {
 		return initProperties(host, from, pass);
 	}
 	
-	protected static final Properties initProperties(String host, String from, String pass) {
+	public static final Properties initProperties(String host, String from, String pass) {
 		Properties props = System.getProperties();
 		
 		String trueString = new Boolean(true).toString();
@@ -84,7 +96,7 @@ public class EnviarCorreo implements TaskListener {
 		return props;
 	}
 	
-	protected final class MyAuthenticator extends javax.mail.Authenticator {
+	public final class MyAuthenticator extends javax.mail.Authenticator {
 		protected PasswordAuthentication getPasswordAuthentication() {
 			return new PasswordAuthentication(from, pass);
 		}
