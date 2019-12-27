@@ -83,7 +83,8 @@ public abstract class ServicioBD<T> {
 		try {
 			ResultSet result = obtenerSet(id);
 			if (result != null) {
-				encontrado = result.next();
+				// Comprueba si ha encontrado algun elemento
+				encontrado = result.getFetchSize() > 0;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
