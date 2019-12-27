@@ -22,7 +22,7 @@ public class IntroducirCodigoArticuloCantidad implements TaskListener {
 		String pedidoActualVariableName = "IDPedidoActual";
 		Pedido pedidoActual;
 		if (tareaDelegada.getExecution().hasVariable(pedidoActualVariableName)) {
-			pedidoActual = ServicioBD.getVariable(tareaDelegada, pedidoActualVariableName);
+			pedidoActual = ServicioBD.<Pedido>getVariable(tareaDelegada, pedidoActualVariableName);
 		} else {
 			int idCliente = Integer.parseInt(ServicioBD.<String>getVariable(tareaDelegada, "IDCliente"));
 			pedidoActual = new Pedido(new Date(), idCliente);
