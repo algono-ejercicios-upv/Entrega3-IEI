@@ -104,16 +104,18 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 	protected class ObtenerArticuloFunction extends ObtenerFunction {
 		@Override
 		public Articulo obtener(int id, ResultSet result) throws SQLException {
-			result.first();
-			
-			String codigo = result.getString(fields[0]);
-			String descripcion = result.getString(fields[1]);
-			int stock = result.getInt(fields[2]);
-			int reservado = result.getInt(fields[3]);
-			double precioUnitario = result.getDouble(fields[4]);
-			
-			Articulo articulo = new Articulo(id, codigo, descripcion, stock, reservado, precioUnitario);
-			return articulo;
+			if (result.first()) {
+				String codigo = result.getString(fields[0]);
+				String descripcion = result.getString(fields[1]);
+				int stock = result.getInt(fields[2]);
+				int reservado = result.getInt(fields[3]);
+				double precioUnitario = result.getDouble(fields[4]);
+				
+				Articulo articulo = new Articulo(id, codigo, descripcion, stock, reservado, precioUnitario);
+				return articulo;
+			} else {
+				return null;
+			}
 		}
 	}
 	

@@ -69,13 +69,15 @@ public class ServicioCabeceraPedidos extends ServicioBD<Pedido> {
 	protected class ObtenerArticuloFunction extends ObtenerFunction {
 		@Override
 		public Pedido obtener(int id, ResultSet result) throws SQLException {
-			result.first();
-			
-			java.util.Date fechaPedido = result.getDate(fields[0]);
-			int idCliente = result.getInt(fields[1]);
-			
-			Pedido pedido = new Pedido(fechaPedido, idCliente);
-			return pedido;
+			if (result.first()) {
+				java.util.Date fechaPedido = result.getDate(fields[0]);
+				int idCliente = result.getInt(fields[1]);
+				
+				Pedido pedido = new Pedido(fechaPedido, idCliente);
+				return pedido;
+			} else {
+				return null;
+			}			
 		}
 	}
 }

@@ -60,14 +60,16 @@ public class ServicioLineasPedido extends ServicioBD<LineaPedido> {
 	protected class ObtenerArticuloFunction extends ObtenerFunction {
 		@Override
 		public LineaPedido obtener(int id, ResultSet result) throws SQLException {
-			result.first();
-			
-			int cantidad = result.getInt(fields[0]);
-			int codigoPedido = result.getInt(fields[1]);
-			int idArticulo = result.getInt(fields[2]);
-			
-			LineaPedido lineaPedido = new LineaPedido(idArticulo, cantidad, codigoPedido);
-			return lineaPedido;
+			if (result.first()) {
+				int cantidad = result.getInt(fields[0]);
+				int codigoPedido = result.getInt(fields[1]);
+				int idArticulo = result.getInt(fields[2]);
+				
+				LineaPedido lineaPedido = new LineaPedido(idArticulo, cantidad, codigoPedido);
+				return lineaPedido;	
+			} else {
+				return null;
+			}
 		}
 	}
 }

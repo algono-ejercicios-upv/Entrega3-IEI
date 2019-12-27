@@ -34,17 +34,20 @@ public class ServicioClientes extends ServicioBD<Cliente> {
 	protected class ObtenerClienteFunction extends ObtenerFunction {
 		@Override
 		public Cliente obtener(int id, ResultSet result) throws SQLException {
-			result.first();
 			
-			String nombre = result.getString(fields[0]);
-			String direccion = result.getString(fields[1]);
-			java.util.Date fechaAlta = result.getDate(fields[2]);
-			String numTarjeta = result.getString(fields[3]);
-			String emisor = result.getString(fields[4]);
-			String correoElectronico = result.getString(fields[5]);
-			
-			Cliente cliente = new Cliente(nombre, direccion, fechaAlta, numTarjeta, emisor, correoElectronico);
-			return cliente;
+			if (result.first()) {
+				String nombre = result.getString(fields[0]);
+				String direccion = result.getString(fields[1]);
+				java.util.Date fechaAlta = result.getDate(fields[2]);
+				String numTarjeta = result.getString(fields[3]);
+				String emisor = result.getString(fields[4]);
+				String correoElectronico = result.getString(fields[5]);
+				
+				Cliente cliente = new Cliente(nombre, direccion, fechaAlta, numTarjeta, emisor, correoElectronico);
+				return cliente;
+			} else {
+				return null;
+			}
 		}
 	}
 

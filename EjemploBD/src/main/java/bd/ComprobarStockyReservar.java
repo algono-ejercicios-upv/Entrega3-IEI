@@ -25,7 +25,7 @@ public class ComprobarStockyReservar implements JavaDelegate {
 		for(int i = lineasPedido.size() - 1; i >= 0; i--) {
 			LineaPedido lineaPedido = lineasPedido.get(i);
 			Articulo articulo = servicioArticulos.obtener(lineaPedido.getIdArticulo());
-			int cantidadAReservar = lineasPedido.get(i).getCantidad();
+			int cantidadAReservar = lineaPedido.getCantidad();
 			
 			if(cantidadAReservar <= articulo.getStock()) {
 				System.out.println("Reserva de articulo: " + articulo.getCodigoArticulo() + ", realizada.");
