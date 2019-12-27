@@ -17,7 +17,7 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 		Id, Codigo
 	}
 	
-	private PrimaryKeyMode primaryKeyMode;
+	private PrimaryKeyMode primaryKeyMode = PrimaryKeyMode.Id;
 
 	@Override
 	public String[] getFields() {
