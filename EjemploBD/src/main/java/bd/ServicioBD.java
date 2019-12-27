@@ -88,6 +88,8 @@ public abstract class ServicioBD<T> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			Conexion.cerrarConexion();
 		}
 		
 		return encontrado;
@@ -104,21 +106,18 @@ public abstract class ServicioBD<T> {
 		} finally {
 			Conexion.cerrarConexion();
 		}
-		return null;		
+		return null;
 	}
 	
-	protected final ResultSet obtenerSet(int id) throws SQLException {
+	// Ojo: Este metodo NO cierra la base de datos. Deben ser los metodos que lo llamen quienes se encarguen.
+	private final ResultSet obtenerSet(int id) throws SQLException {
 		ResultSet resultado = null;
 		Connection conn = Conexion.abrirConexion();
 		if (conn != null) {
-			try {
-				String SQL = getSelectQuery();
-				PreparedStatement statement = conn.prepareStatement(SQL);
-				statement.setInt(1, id);
-			    resultado = statement.executeQuery();
-			} finally {
-				Conexion.cerrarConexion();
-			}
+			String SQL = getSelectQuery();
+			PreparedStatement statement = conn.prepareStatement(SQL);
+			statement.setInt(1, id);
+		    resultado = statement.executeQuery();
 		}
 		
 		return resultado;
