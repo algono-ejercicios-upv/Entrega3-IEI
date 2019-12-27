@@ -8,10 +8,22 @@ public class LineaPedido implements Serializable {
 	private int idArticulo, cantidad, codigoPedido;
 	private String codigoArticulo;
 	
+	public LineaPedido(int idArticulo, int cantidad) {
+		super();
+
+		this.idArticulo = idArticulo;
+		this.cantidad = cantidad;
+	}
+	
+	public LineaPedido(int idArticulo, int cantidad, int codigoPedido) {
+		this(idArticulo, cantidad);
+		this.codigoPedido = codigoPedido;
+	}
+	
 	public LineaPedido(String codigoArticulo, int cantidad) {
 		super();
 
-		this.setCodigoArticulo(codigoArticulo);
+		this.codigoArticulo = codigoArticulo;
 		this.cantidad = cantidad;
 	}
 	

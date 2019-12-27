@@ -64,9 +64,9 @@ public class ServicioLineasPedido extends ServicioBD<LineaPedido> {
 			
 			int cantidad = result.getInt(fields[0]);
 			int codigoPedido = result.getInt(fields[1]);
-			int codigoArticulo = result.getInt(fields[2]);
+			int idArticulo = result.getInt(fields[2]);
 			
-			LineaPedido lineaPedido = new LineaPedido(cantidad, codigoPedido, codigoArticulo);
+			LineaPedido lineaPedido = new LineaPedido(idArticulo, cantidad, codigoPedido);
 			return lineaPedido;
 		}
 	}
