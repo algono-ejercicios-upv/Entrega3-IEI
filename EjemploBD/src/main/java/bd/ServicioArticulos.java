@@ -12,6 +12,12 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 	private static final String tableName = "articulos", primaryKeyName = "idArticulos";
 	private static final String[] fields = new String[] { "CodigoArticulo", "Descripcion", "Stock", "Reservado",
 			"PrecioUnitario" };
+	
+	public enum PrimaryKeyMode {
+		Id, Codigo
+	}
+	
+	private PrimaryKeyMode primaryKeyMode;
 
 	@Override
 	public String[] getFields() {
@@ -25,12 +31,16 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 
 	@Override
 	public String getPrimaryKeyName() {
-		return primaryKeyName;
+		switch (primaryKeyMode) {
+			case Codigo: return fields[0];
+			default: return primaryKeyName;
+		}
 	}
 	
 	public int buscar(String codigoArticulo) {
 		// Damos por hecho que no hay id negativas
 		int id = -1;
+		primaryKeyMode = PrimaryKeyMode.Codigo;
 
 		try {
 			ResultSet result = obtenerSet(codigoArticulo);
@@ -45,6 +55,8 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 		} finally {
 			Conexion.cerrarConexion();
 		}
+		
+		primaryKeyMode = PrimaryKeyMode.Id;
 		
 		return id;
 	}
