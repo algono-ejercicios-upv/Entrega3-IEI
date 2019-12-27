@@ -1,5 +1,7 @@
 package bd;
 
+import java.util.List;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -14,19 +16,23 @@ public class ValidarPedido implements JavaDelegate {
 		Pedido pedidoActual = (Pedido) ejecucion.getVariable("IDPedidoActual");
 		ServicioArticulos servicioArticulos = new ServicioArticulos();
 		
-		for (int i = pedidoActual.getLineasPedido().size() - 1; i >= 0; i--) {
-			LineaPedido lineaPedido = pedidoActual.getLineasPedido().get(i);
+		List<LineaPedido> lineasPedido = pedidoActual.getLineasPedido();
+		for (int i = lineasPedido.size() - 1; i >= 0; i--) {
+			LineaPedido lineaPedido = lineasPedido.get(i);
 			
-			System.out.println("Comprobando si existe el código: " + lineaPedido.getIdArticulo());
-			boolean encontrado = servicioArticulos.buscar(lineaPedido.getIdArticulo());
+			String codigoArticulo = lineaPedido.getCodigoArticulo();
+			System.out.println("Comprobando si existe el código: " + codigoArticulo);
+			int idArticulo = servicioArticulos.buscar(codigoArticulo);
 
-			if (!encontrado) {
-				LineaPedido lineaEliminada = pedidoActual.getLineasPedido().remove(i);
+			if (idArticulo > 0) {
+				lineaPedido.setIdArticulo(idArticulo);
+			} else {
+				LineaPedido lineaEliminada = lineasPedido.remove(i);
 				System.out.println("Elemento " + lineaEliminada + " no existe.");
 			}
 		}
 		
-		valido = pedidoActual.getLineasPedido().size() > 0;
+		valido = lineasPedido.size() > 0;
 		ejecucion.setVariable("IDValido", valido);
 	}
 }
