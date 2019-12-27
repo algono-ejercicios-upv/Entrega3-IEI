@@ -48,7 +48,7 @@ public class ServicioLineasPedido extends ServicioBD<LineaPedido> {
 		public void insertar(PreparedStatement statement) throws SQLException {
 			statement.setInt(1, lineaPedido.getCantidad());
 			statement.setInt(2, lineaPedido.getCodigoPedido());
-			statement.setInt(3, lineaPedido.getCodigoArticulo());
+			statement.setInt(3, lineaPedido.getIdArticulo());
 		}
 	}
 

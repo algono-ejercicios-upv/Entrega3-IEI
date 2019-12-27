@@ -1,5 +1,6 @@
 package bd;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,39 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 	@Override
 	public String getPrimaryKeyName() {
 		return primaryKeyName;
+	}
+	
+	public int buscar(String codigoArticulo) {
+		// Damos por hecho que no hay id negativas
+		int id = -1;
+
+		try {
+			ResultSet result = obtenerSet(codigoArticulo);
+			if (result != null) {
+				// Se guarda la id del elemento
+				id = result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cerrarConexion();
+		}
+		
+		return id;
+	}
+	
+	// Ojo: Este metodo NO cierra la base de datos. Deben ser los metodos que lo llamen quienes se encarguen.
+	private final ResultSet obtenerSet(String codigoArticulo) throws SQLException {
+		ResultSet resultado = null;
+		Connection conn = Conexion.abrirConexion();
+		if (conn != null) {
+			String SQL = getSelectQuery();
+			PreparedStatement statement = conn.prepareStatement(SQL);
+			statement.setString(1, codigoArticulo);
+		    resultado = statement.executeQuery();
+		}
+		
+		return resultado;
 	}
 	
 	@Override

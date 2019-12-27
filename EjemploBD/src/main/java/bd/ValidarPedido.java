@@ -17,8 +17,8 @@ public class ValidarPedido implements JavaDelegate {
 		for (int i = pedidoActual.getLineasPedido().size() - 1; i >= 0; i--) {
 			LineaPedido lineaPedido = pedidoActual.getLineasPedido().get(i);
 			
-			System.out.println("Comprobando si existe el código: " + lineaPedido.getCodigoArticulo());
-			boolean encontrado = servicioArticulos.buscar(lineaPedido.getCodigoArticulo());
+			System.out.println("Comprobando si existe el código: " + lineaPedido.getIdArticulo());
+			boolean encontrado = servicioArticulos.buscar(lineaPedido.getIdArticulo());
 
 			if (!encontrado) {
 				LineaPedido lineaEliminada = pedidoActual.getLineasPedido().remove(i);

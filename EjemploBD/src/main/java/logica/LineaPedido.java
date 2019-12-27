@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class LineaPedido implements Serializable {
 	private static final long serialVersionUID = 42069L;
 	
-	private int codigoArticulo, cantidad, codigoPedido;
+	private int idArticulo, cantidad, codigoPedido;
 	
 	public LineaPedido(int codigoArticulo, int cantidad) {
 		super();
 
-		this.codigoArticulo = codigoArticulo;
+		this.idArticulo = codigoArticulo;
 		this.cantidad = cantidad;
 	}
 	
@@ -27,12 +27,12 @@ public class LineaPedido implements Serializable {
 		this.cantidad = cantidad;
 	}
 	
-	public int getCodigoArticulo() {
-		return this.codigoArticulo;
+	public int getIdArticulo() {
+		return this.idArticulo;
 	}
 	
-	public void setCodigoArticulo(int codigoArticulo) {
-		this.codigoArticulo = codigoArticulo;
+	public void setIdArticulo(int codigoArticulo) {
+		this.idArticulo = codigoArticulo;
 	}
 	
 	public int getCodigoPedido() {
