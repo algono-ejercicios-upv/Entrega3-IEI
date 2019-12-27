@@ -1,12 +1,14 @@
 package bd;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import logica.Articulo;
+import logica.LineaPedido;
 import logica.Pedido;
 
 public class ComprobarStockyReservar implements JavaDelegate {
@@ -19,9 +21,11 @@ public class ComprobarStockyReservar implements JavaDelegate {
 		
 		System.out.println("Comprobando reservas a realizar...");
 		
-		for(int i = pedidoActual.getLineasPedido().size() - 1; i >= 0; i--) {
-			Articulo articulo = servicioArticulos.obtener(i);
-			int cantidadAReservar = pedidoActual.getLineasPedido().get(i).getCantidad();
+		List<LineaPedido> lineasPedido = pedidoActual.getLineasPedido();
+		for(int i = lineasPedido.size() - 1; i >= 0; i--) {
+			LineaPedido lineaPedido = lineasPedido.get(i);
+			Articulo articulo = servicioArticulos.obtener(lineaPedido.getIdArticulo());
+			int cantidadAReservar = lineasPedido.get(i).getCantidad();
 			
 			if(cantidadAReservar <= articulo.getStock()) {
 				System.out.println("Reserva de articulo: " + articulo.getCodigoArticulo() + ", realizada.");
@@ -31,7 +35,7 @@ public class ComprobarStockyReservar implements JavaDelegate {
 				servicioArticulos.actualizar(articulo);
 			} else {
 				System.out.println("No se ha podido realizar la reserva. Esta línea de pedido ha sido borrada del pedido.");
-				pedidoActual.getLineasPedido().remove(i);
+				lineasPedido.remove(i);
 			}
 			if(!mapArticulos.containsKey(articulo.getIdArticulo())) {
 				mapArticulos.put(articulo.getIdArticulo(), articulo);	
