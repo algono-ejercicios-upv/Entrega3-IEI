@@ -14,7 +14,7 @@ public abstract class ServicioBD<T> {
 	public final String getSelectQuery() {
 		String primaryKeyName = getPrimaryKeyName();
 		String tableName = getTableName();
-		return String.format("SELECT %s FROM %s where %s =?", primaryKeyName, tableName, primaryKeyName);
+		return String.format("SELECT * FROM %s where %s =?", tableName, primaryKeyName);
 	}
 	
 	public final String getUpdateQuery() {
