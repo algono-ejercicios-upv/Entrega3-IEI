@@ -206,7 +206,6 @@ public abstract class ServicioBD<T> {
 				insertar(statement);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
 				Conexion.cerrarConexion();
 			}
 		}
