@@ -36,8 +36,9 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 			ResultSet result = obtenerSet(codigoArticulo);
 			if (result != null) {
 				// Se guarda la id del elemento
-				result.next();
-				id = result.getInt(1);
+				if (result.next()) {
+					id = result.getInt(1);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
