@@ -190,7 +190,6 @@ public abstract class ServicioBD<T> {
 				return obtener(id, result);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
 				Conexion.cerrarConexion();
 			}
 			return null;

@@ -29,7 +29,7 @@ public class IntroducirCodigoArticuloCantidad implements TaskListener {
 			tareaDelegada.getExecution().setVariable(pedidoActualVariableName, pedidoActual);
 		}
 		
-		pedidoActual.getLineasPedido().add(new LineaPedido(articulo, cantidadArticulo, pedidoActual));
+		pedidoActual.getLineasPedido().add(new LineaPedido(articulo, cantidadArticulo));
 	}
 
 }

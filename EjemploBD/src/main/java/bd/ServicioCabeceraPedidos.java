@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import logica.LineaPedido;
 import logica.Pedido;
 
 public class ServicioCabeceraPedidos extends ServicioBD<Pedido> {
@@ -33,7 +34,16 @@ public class ServicioCabeceraPedidos extends ServicioBD<Pedido> {
 	
 	@Override
 	public int insertar(Pedido pedido) {
-		return insertar(new InsertarCabeceraPedidoConsumer(pedido));
+		int id = insertar(new InsertarCabeceraPedidoConsumer(pedido));
+		
+		// Tras haber creado el pedido, crea sus lineas
+		ServicioLineasPedido servicioLineasPedido = new ServicioLineasPedido();
+		for (LineaPedido lineaPedido : pedido.getLineasPedido()) {
+			lineaPedido.setCodigoPedido(id);
+			servicioLineasPedido.insertar(lineaPedido);
+		}
+		
+		return id;
 	}
 
 	protected class InsertarCabeceraPedidoConsumer extends InsertarConsumer {

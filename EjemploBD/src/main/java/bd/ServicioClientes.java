@@ -7,7 +7,7 @@ import logica.Cliente;
 
 public class ServicioClientes extends ServicioBD<Cliente> {
 
-	private static final String tableName = "Cliente", primaryKeyName = "idCliente";
+	private static final String tableName = "clientes", primaryKeyName = "idClientes";
 	private static final String[] fields = new String[] { "Nombre", "Direccion", "FechaAlta", "NumTarjeta", "Emisor",
 			"Correoelectronico" };
 
