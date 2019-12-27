@@ -55,6 +55,7 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 				if (result.next()) {
 					id = result.getInt(1);
 				}
+				System.out.println("ID: " + id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,7 +72,9 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 		ResultSet resultado = null;
 		Connection conn = Conexion.abrirConexion();
 		if (conn != null) {
+			System.out.println("Seleccionando articulo...");
 			String SQL = getSelectQuery();
+			System.out.println("SQL: " + SQL);
 			PreparedStatement statement = conn.prepareStatement(SQL);
 			statement.setString(1, codigoArticulo);
 		    resultado = statement.executeQuery();
