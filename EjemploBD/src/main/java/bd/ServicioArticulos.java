@@ -37,6 +37,12 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 		}
 	}
 	
+	@Override
+	public boolean buscar(int id) {
+		primaryKeyMode = PrimaryKeyMode.Id;
+		return super.buscar(id);
+	}
+	
 	public int buscar(String codigoArticulo) {
 		// Damos por hecho que no hay id negativas
 		int id = -1;
@@ -54,9 +60,8 @@ public class ServicioArticulos extends ServicioBD<Articulo> {
 			e.printStackTrace();
 		} finally {
 			Conexion.cerrarConexion();
+			primaryKeyMode = PrimaryKeyMode.Id;
 		}
-		
-		primaryKeyMode = PrimaryKeyMode.Id;
 		
 		return id;
 	}

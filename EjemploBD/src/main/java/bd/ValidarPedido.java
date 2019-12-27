@@ -22,7 +22,7 @@ public class ValidarPedido implements JavaDelegate {
 
 			if (!encontrado) {
 				LineaPedido lineaEliminada = pedidoActual.getLineasPedido().remove(i);
-				System.out.println("Elemento " + lineaEliminada + "no existe.");
+				System.out.println("Elemento " + lineaEliminada + " no existe.");
 			}
 		}
 		
